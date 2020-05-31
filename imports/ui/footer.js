@@ -12,5 +12,9 @@ Template.Profile.helpers({
     profileName() {
         console.log('profile');
         return "Devesh Kharve"
+    },
+
+    profileLink() {
+        return "https://www.linkedin.com/in/deveshkharve/";
     }
 })
