@@ -19,7 +19,7 @@ Once all the packages are successfully installed run the following to start the 
 ```meteor```
 the app by default runs on port ```3000```
 you can open the application in your browser at
-```http://localhost:3000/#```
+```http://localhost:3000/```
 
 
 ### Features
