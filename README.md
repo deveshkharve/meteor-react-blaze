@@ -7,5 +7,5 @@ where the template is wrapped in a react component
 
 
 ### requirements
-- node(https://nodejs.org/en/download/)
-- meteor(https://www.meteor.com/install)
+- (node)[https://nodejs.org/en/download/]
+- (meteor)[https://www.meteor.com/install]
