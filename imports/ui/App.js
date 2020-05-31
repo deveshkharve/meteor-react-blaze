@@ -12,23 +12,37 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
- 
+    
+    // init state
     this.state = {
       hideCompleted: false,
     };
   }
 
+  /**
+   * handler to add task in db
+   */
   addTask = (text) => {
     Meteor.call('tasks.insert', text);
   }
 
+  /**
+   * returns the Task component from the props injected by the tracker
+   */
   renderTasks = () => {
+    
     let filteredTasks = this.props.tasks;
+    
+    // check if to hide the completed task and filter
     if (this.state.hideCompleted) {
       filteredTasks = filteredTasks.filter(task => !task.checked);
     }
+    
+    // get the current user Id
     const currentUserId = this.props.currentUser && this.props.currentUser._id;
+    
     return filteredTasks.map(task => {
+      // check if current user is the owner and set private/public set button
       const showPrivateButton = task.owner === currentUserId;
 
       return (
@@ -81,6 +95,8 @@ class App extends React.Component {
 
 
 export default withTracker(() => {
+  // subscribe to the published object task, only Task.find will be executed, 
+  // and the parameters will be merged, the find query and sort are merged
   Meteor.subscribe('tasks');
   return {
     tasks: Tasks.find({}, { sort: { createdAt: -1 } }).fetch(),

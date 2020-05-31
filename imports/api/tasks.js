@@ -7,6 +7,7 @@ export const Tasks = new Mongo.Collection('tasks');
 if (Meteor.isServer) {
     // This code only runs on the server
     Meteor.publish('tasks', function tasksPublication() {
+        // allow only find api with the follwing query structure.
         return Tasks.find({
             $or: [
                 { private: { $ne: true } },
@@ -32,8 +33,11 @@ Meteor.methods({
             username: Meteor.users.findOne(this.userId).username,
         });
     },
+
     'tasks.remove'(taskId) {
+        // type check
         check(taskId, String);
+
         const task = Tasks.findOne(taskId);
         if (task.private && task.owner !== this.userId) {
             // If the task is private, make sure only the owner can delete it
@@ -41,17 +45,23 @@ Meteor.methods({
         }
         Tasks.remove(taskId);
     },
+
     'tasks.setChecked'(taskId, setChecked) {
+        // type check
         check(taskId, String);
         check(setChecked, Boolean);
+
         const task = Tasks.findOne(taskId);
+
         if (task.private && task.owner !== this.userId) {
             // If the task is private, make sure only the owner can delete it
             throw new Meteor.Error('not-authorized');
         }
+
         Tasks.update(taskId, { $set: { checked: setChecked } });
     },
     'tasks.setPrivate'(taskId, setToPrivate) {
+        // type check
         check(taskId, String);
         check(setToPrivate, Boolean);
 

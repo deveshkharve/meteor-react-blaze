@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-// Task component - represents a single todo item
+// Task form component - add task
 export default class TaskForm extends Component {
   
   handleSubmit = (e) => {
     e.preventDefault();
+    // use react-dom to interact with the elements by ref value
     const text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
     console.log('text', text);
     this.props.submitHandler(text);

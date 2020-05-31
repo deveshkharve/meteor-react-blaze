@@ -4,17 +4,26 @@ import classnames from 'classnames';
 // Task component - represents a single todo item
 export default class Task extends Component {
   
+  /**
+   * delete task from mongo
+   */
   deleteThisTask = () => {
     const { task }= this.props;
     Meteor.call('tasks.remove', task._id);
   }
   
+  /**
+   * toggle task for the user
+   */
   toggleChecked = () => {
     // Set the checked property to the opposite of its current value
     const { task }= this.props;
     Meteor.call('tasks.setChecked', task._id, !task.checked);
   }
   
+  /**
+   * toggle if task is private/public
+   */
   togglePrivate = () => {
     Meteor.call('tasks.setPrivate', this.props.task._id, ! this.props.task.private);
   }

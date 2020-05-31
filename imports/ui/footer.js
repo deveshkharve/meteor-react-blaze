@@ -7,14 +7,10 @@ Template.Footer.onRendered(()=>{
     console.log('Footer')
 })
 
-
+// helper to get profile data
 Template.Profile.helpers({
     profileName() {
         console.log('profile');
-        return "Devesh"
+        return "Devesh Kharve"
     }
-})
-
-Template.Footer.events({
-
 })
