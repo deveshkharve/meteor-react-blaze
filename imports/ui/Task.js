@@ -37,9 +37,12 @@ export default class Task extends Component {
 
     return (
       <li className={taskClassName}>
-        <button className="delete" onClick={this.deleteThisTask}>
+        {
+          true ?  <button className="delete" onClick={this.deleteThisTask}>
           &times;
-        </button>
+        </button> : ""
+        }
+        
  
         <input
           type="checkbox"

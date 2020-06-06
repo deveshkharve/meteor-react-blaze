@@ -33,6 +33,17 @@ if (Meteor.isServer) {
                 // Verify that the method does what we expected
                 assert.equal(Tasks.find().count(), 0);
             });
+
+            it('can delete if logged in', () => {
+                const deleteTask = Meteor.server.method_handlers['tasks.remove'];
+                const invocation = { userId: 'abcd' };
+                try {
+                    deleteTask.apply(invocation, [taskId]);
+                } catch (error) {
+                    console.log(error);
+                }
+                assert.equal(Tasks.find().count(), 1);
+            });
         });
     });
 }

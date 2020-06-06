@@ -22,8 +22,16 @@ class App extends React.Component {
   /**
    * handler to add task in db
    */
-  addTask = (text) => {
-    Meteor.call('tasks.insert', text);
+  addTask = async (text) => {
+    
+    const res = this.props.tasks.filter(item => item.text == text);
+    Meteor.call('tasks.insert', text, (error, res)=> {
+      console.log('err', error, 'res', res);
+      if (error){ 
+        alert(error.error);
+        return;
+      }  
+    });
   }
 
   /**
@@ -87,7 +95,7 @@ class App extends React.Component {
         <ul>
           {this.renderTasks()}
         </ul>
-        <BlazeWrapper templateName="Footer"/>
+        <BlazeWrapper templateName="Footer" customProps={{id: 1}}/>
       </div>
     );
   }

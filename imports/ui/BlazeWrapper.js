@@ -7,7 +7,7 @@ export default class BlazeWrapper extends React.Component {
   render() {
     return (
       <div>
-        <Blaze template={this.props.templateName} />
+        <Blaze template={this.props.templateName} customProps={this.props} />
       </div>
     )
   }
